@@ -65,52 +65,43 @@ void SortedSet<T>::deleteAll()
 template <typename T>
 void SortedSet<T>::union_(SortedSet<T> const& otherList)
 {
-	if (otherList.isEmpty())
-		return;
-	
-	if (this->isEmpty())
-		appendList(otherList.head);
+	Node<T>* prev = nullptr;
+	Node<T>* curr1 = this->head;
+	Node<T>* curr2 = otherList.head;
 
-	else
+	while (curr1 != nullptr && curr2 != nullptr)
 	{
-		Node<T>* prev = nullptr;
-		Node<T>* curr1 = this->head;
-		Node<T>* curr2 = otherList.head;
-
-		while (curr1 != nullptr && curr2 != nullptr)
+		if (curr1->data == curr2->data)
 		{
-			if (curr1->data == curr2->data)
-			{
-				prev = curr1;
-				curr1 = curr1->next;
-				curr2 = curr2->next;
-			}
-			else if (curr1->data > curr2->data)
-			{
-				if (prev == nullptr)
-				{
-					this->insertAtHead(curr2->data);
-					prev = this->head;
-				}
-				else
-				{
-					this->insertAfter(prev, curr2->data);
-					prev = prev->next;
-				}
-
-				curr2 = curr2->next;
-			}
-			else // curr1->next->data < curr2->next->data
-			{
-				prev = curr1;
-				curr1 = curr1->next;
-			}
+			prev = curr1;
+			curr1 = curr1->next;
+			curr2 = curr2->next;
 		}
+		else if (curr1->data > curr2->data)
+		{
+			if (prev == nullptr)
+			{
+				this->insertAtHead(curr2->data);
+				prev = this->head;
+			}
+			else
+			{
+				this->insertAfter(prev, curr2->data);
+				prev = prev->next;
+			}
 
-		//if this list has ended but the other list has not ended
-		if (curr2 != nullptr)
-			this->appendList(curr2);
-	}
+			curr2 = curr2->next;
+		}
+		else // curr1->next->data < curr2->next->data
+		{
+			prev = curr1;
+			curr1 = curr1->next;
+		}
+	}//end of while loop
+
+	//if this list has ended but the other list has not ended
+	if (curr2 != nullptr)
+		this->appendList(curr2);
 }
 
 template <typename T>
@@ -149,7 +140,7 @@ void SortedSet<T>::intersection(SortedSet<T> const& otherList)
 		{
 			curr2 = curr2->next;
 		}
-	}
+	}//end of while loop
 
 	if (prev != nullptr) 
 	{
