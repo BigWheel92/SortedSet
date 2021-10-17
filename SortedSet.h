@@ -20,7 +20,6 @@ private:
 	Node<T>* tail;
 	int totalElements;
 
-private:
 	void insertAtHead(T const&);
 	void insertAtTail(T const&);
 	void deleteFromHead();
