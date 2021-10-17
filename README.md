@@ -1,5 +1,5 @@
 # SortedSet
-an implementation of sorted set class in c++ using singly linked list.
+an implementation of sorted set class in C++ using singly linked list.
 
 # The following member functions are available in the public interface:
 
