@@ -18,7 +18,7 @@ class SortedSet
 private:
 	Node<T>* head;
 	Node<T>* tail;
-	int totalElements = 0;
+	int totalElements;
 
 private:
 	void insertAtHead(T const&);
